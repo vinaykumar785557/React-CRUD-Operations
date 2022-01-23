@@ -1,4 +1,4 @@
-export default (state, action) => {
+const AppReducer = (state, action) => {
   switch (action.type) {
     case "REMOVE_USER":
       return {
@@ -8,7 +8,22 @@ export default (state, action) => {
       return {
         users: [action.payload, ...state.users],
       };
+    case "EDIT_USER":
+      const updateUser = action.payload;
+
+      const updateUsers = state.users.map((user) => {
+        if (user.id === updateUser.id) {
+          return updateUser;
+        }
+
+        return user;
+      });
+
+      return { ...state, users: updateUsers };
+
     default:
       return state;
   }
 };
+
+export default AppReducer;
