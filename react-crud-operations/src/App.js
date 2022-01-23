@@ -1,9 +1,21 @@
 import React from "react";
+import AddUser from "./components/AddUser";
+import EditUser from "./components/EditUser";
+import Home from "./components/Home";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <h1>React CRUD App</h1>
+      <Router>
+        <h1>Nav</h1>
+        <Switch>
+          <Home />
+          <AddUser />
+          <EditUser />
+        </Switch>
+      </Router>
     </div>
   );
 }
