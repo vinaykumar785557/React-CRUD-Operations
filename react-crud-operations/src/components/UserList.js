@@ -1,27 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ListGroup, ListGroupItem, Button, List } from "reactstrap";
 import { Link } from "react-router-dom";
+import { GlobalContext } from "../context/GlobalState";
 function UserList() {
+  // const usersData = useContext (GlobalContext)
+  //console.log(usersData)
+  // const{users} =  usersData // destructuring
+
+  const { users, removeUser, addUser } = useContext(GlobalContext);
+  // console.log(users);
+  // console.log(removeUser);
   return (
     <ListGroup className="mt-4">
-      <ListGroupItem className="d-flex">
-        <strong>User One</strong>
-        <div className="ml-auto">
-          <Link className="btn btn-warning mr-1" to="/edit/1">
-            Edit
-          </Link>
-          <Button color="danger">Delete</Button>
-        </div>
-      </ListGroupItem>
-      <ListGroupItem className="d-flex">
-        <strong>User One</strong>
-        <div className="ml-auto">
-          <Link className="btn btn-warning mr-1" to="/edit/1">
-            Edit
-          </Link>
-          <Button color="danger">Delete</Button>
-        </div>
-      </ListGroupItem>
+      {/* // mapping data using javascript map() */}
+      {users.map((user) => (
+        <ListGroupItem className="d-flex" key={user.id}>
+          <strong>{user.name}</strong>
+          <div className="ml-auto">
+            <Link className="btn btn-warning mr-1" to={`/edit/${user.id}`}>
+              Edit
+            </Link>
+            <Button onClick={() => removeUser(user.id)} color="danger">
+              Delete
+            </Button>
+          </div>
+        </ListGroupItem>
+      ))}
     </ListGroup>
   );
 }
